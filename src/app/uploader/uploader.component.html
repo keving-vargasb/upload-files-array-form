@@ -1,0 +1,43 @@
+<button type="button" (click)="addProductToForm()">Add product</button><br><br>
+<form [formGroup]="productForm" (ngSubmit)="submit()">
+
+    <div  *ngFor="let product of productForm.value; let i = index">
+        <hr>
+        <div [formGroupName]="i">
+            Nombre del producto <br>
+            <input type="text"  formControlName="name"/><br><br>
+            Imagen principal <br>
+            <input type="file" (change)="mainImageOnChange($event, i)" accept="image/x-png,image/jpeg"><br><br>
+            Fotos adicionales <br>
+            <input type="file" multiple (change)="detectFiles($event, i)" accept="image/x-png,image/jpeg">
+        </div>
+        <hr>
+    </div>
+    <br>
+    <br>
+    <button type="submit">Submit</button>
+
+
+<!-- 
+
+
+    <input type="file" class="custom-file-input form-control" id="files" multiple (change)="detectFiles($event)" accept="image/x-png,image/jpeg">
+
+   <div class="images-preview mt-2" *ngIf="photos.length">
+        <div formArrayName="photos" *ngFor="let photo of photos.controls; let i = index;">
+            <div [formGroupName]="i">
+                <img [src]="photo.controls.url.value" class="card-img-top" alt="Image Preview">
+            </div>
+        </div>
+    </div> -->
+   <!--  <br>
+    <br>
+    
+    <br>
+    <br> -->
+    <pre>
+        {{ productForm.value | json}}
+    </pre>
+</form>
+
+
